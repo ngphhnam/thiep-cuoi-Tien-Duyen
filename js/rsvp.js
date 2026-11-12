@@ -39,7 +39,7 @@ const RSVPController = (() => {
         e.preventDefault();
 
         const name = document.getElementById('rsvp-name')?.value.trim();
-        const side = sideInput?.value || 'Nhà gái';
+        const side = sideInput?.value || 'Nhà trai';
         const attending = attendingSelect?.value || 'yes';
         const guests = document.getElementById('rsvp-guests')?.value || '1';
         const message = document.getElementById('rsvp-message')?.value.trim() || '';

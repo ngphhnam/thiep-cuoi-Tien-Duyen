@@ -7,12 +7,12 @@ const WEDDING_DATA = {
   title: "Bích Duyên & Việt Tiến",
   slug: "tien-duyen",
   theme: "classic",
-  
+
   // Thông tin ngày cưới
   weddingDate: "2026-12-18T09:00:00",
   displayDate: "18 . 12 . 2026",
   displayDateFull: "Thứ Sáu, ngày 18 tháng 12 năm 2026",
-  city: "Phước Long, Đồng Nai",
+  city: "Lộc Thuận, Vĩnh Long",
 
   // Thông tin cặp đôi
   couple: {
@@ -70,15 +70,15 @@ const WEDDING_DATA = {
   // Địa điểm & Lịch trình tổ chức
   venues: [
     {
-      id: "vu-quy",
-      title: "Lễ Vu Quy",
+      id: "tan-hon",
+      title: "Lễ Tân Hôn",
       time: "09:00 - 10:30",
       date: "18.12.2026",
       icon: "🏠",
       image: "image/wedding-04.jpg",
-      area: "Tư gia Nhà Gái",
-      address: "Tổ 2, Khu Phố 3, Long Thủy, Phước Long, Đồng Nai",
-      mapUrl: "https://maps.google.com/?q=Long+Th%E1%BB%A7y%2C+Ph%C6%B0%E1%BB%9Bc+Long%2C+%C4%90%E1%BB%93ng+Nai"
+      area: "Tư gia Nhà Trai",
+      address: "281 Quốc Lộ 57B, Lộc Thuận, Vĩnh Long",
+      mapUrl: "https://maps.google.com/?q=281+Qu%E1%BB%91c+L%E1%BB%99+57B%2C+L%E1%BB%99c+Thu%E1%BA%ADn%2C+V%C4%A9nh+Long"
     },
     {
       id: "tiec-cuoi",
@@ -87,9 +87,9 @@ const WEDDING_DATA = {
       date: "18.12.2026",
       icon: "💒",
       image: "image/wedding-05.jpg",
-      area: "Trung Tâm Tiệc Cưới",
-      address: "Phước Long, Đồng Nai",
-      mapUrl: "https://maps.google.com/?q=Ph%C6%B0%E1%BB%9Bc+Long%2C+%C4%90%E1%BB%93ng+Nai"
+      area: "Tư gia Nhà Trai",
+      address: "281 Quốc Lộ 57B, Lộc Thuận, Vĩnh Long",
+      mapUrl: "https://maps.google.com/?q=281+Qu%E1%BB%91c+L%E1%BB%99+57B%2C+L%E1%BB%99c+Thu%E1%BA%ADn%2C+V%C4%A9nh+Long"
     }
   ],
 

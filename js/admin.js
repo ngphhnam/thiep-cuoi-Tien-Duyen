@@ -10,11 +10,12 @@ const AdminApp = (() => {
   const STORAGE_KEY_GUESTS = 'wedding_admin_guests_v1';
   const STORAGE_KEY_TEMPLATE = 'wedding_admin_msg_template';
   const STORAGE_KEY_SHEET_URL = 'wedding_admin_sheet_url';
-  const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyBdBB6x_9SwFdLJxtYzVdjm1URAPD2r32iDaC0mlhbwamKd9ljm43ZhX_MXV4LeTmgMw/exec';
+  const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzLGaFQYy2qwCT9fkvwfmN4tza-88jMWmRw-6FnP-jTQPXRJodAhNZA-ZX6k0kUQf0H/exec';
+  const OLD_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyBdBB6x_9SwFdLJxtYzVdjm1URAPD2r32iDaC0mlhbwamKd9ljm43ZhX_MXV4LeTmgMw/exec';
 
   // Mẫu tin nhắn mời cưới mặc định
-  const DEFAULT_MESSAGE_TEMPLATE = 
-`Thân gửi {name},
+  const DEFAULT_MESSAGE_TEMPLATE =
+    `Thân gửi {name},
 
 Bích Duyên & Việt Tiến trân trọng kính mời {name} đến chung vui cùng gia đình chúng mình tại Lễ Thành Hôn vào ngày 18.12.2026.
 
@@ -120,7 +121,12 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
 
   // ==================== GOOGLE SHEETS SYNC ====================
   const getSheetUrl = () => {
-    return localStorage.getItem(STORAGE_KEY_SHEET_URL) || DEFAULT_SHEET_URL;
+    const saved = localStorage.getItem(STORAGE_KEY_SHEET_URL);
+    if (!saved || saved === OLD_SHEET_URL) {
+      localStorage.setItem(STORAGE_KEY_SHEET_URL, DEFAULT_SHEET_URL);
+      return DEFAULT_SHEET_URL;
+    }
+    return saved;
   };
 
   const updateSheetSyncStatus = () => {
@@ -226,7 +232,7 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
         });
 
         // Nếu trên web có khách chưa có trên Sheet, đẩy lên Sheet
-        const missingOnSheet = guests.filter(g => 
+        const missingOnSheet = guests.filter(g =>
           !data.some(d => String(d.name).toLowerCase().trim() === g.name.toLowerCase())
         );
         if (missingOnSheet.length > 0) {
@@ -557,7 +563,7 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-    const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => 
+    const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b =>
       b.getAttribute('onclick').includes(tabId)
     );
     if (activeBtn) activeBtn.classList.add('active');
@@ -635,9 +641,9 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
             <input type="text" class="guest-link-input" readonly value="${escapeHtml(link)}" onclick="this.select()" />
           </td>
           <td class="status-cell" style="text-align: center;">
-            ${g.copied 
-              ? `<span class="badge badge-copied" title="${g.copiedAt || ''}">✅ Đã copy</span>` 
-              : `<span class="badge badge-pending">⏳ Chưa gửi</span>`}
+            ${g.copied
+          ? `<span class="badge badge-copied" title="${g.copiedAt || ''}">✅ Đã copy</span>`
+          : `<span class="badge badge-pending">⏳ Chưa gửi</span>`}
           </td>
           <td style="text-align: right;">
             <div class="table-actions">
