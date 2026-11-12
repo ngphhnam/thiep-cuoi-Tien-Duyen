@@ -7,16 +7,15 @@ const AdminApp = (() => {
   // Cấu hình mã PIN đăng nhập (1998)
   const VALID_PINS = ['1998'];
   const STORAGE_KEY_AUTH = 'wedding_admin_authenticated';
-  const STORAGE_KEY_GUESTS = 'wedding_admin_guests_groom_v1';
-  const STORAGE_KEY_TEMPLATE = 'wedding_admin_msg_template_groom';
-  const STORAGE_KEY_SHEET_URL = 'wedding_admin_sheet_url_groom';
+  const STORAGE_KEY_GUESTS = 'wedding_admin_guests_v1';
+  const STORAGE_KEY_TEMPLATE = 'wedding_admin_msg_template';
+  const STORAGE_KEY_SHEET_URL = 'wedding_admin_sheet_url';
   const STORAGE_KEY_WISHES = 'wedding_custom_wishes';
-  const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzLGaFQYy2qwCT9fkvwfmN4tza-88jMWmRw-6FnP-jTQPXRJodAhNZA-ZX6k0kUQf0H/exec';
-  const OLD_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyBdBB6x_9SwFdLJxtYzVdjm1URAPD2r32iDaC0mlhbwamKd9ljm43ZhX_MXV4LeTmgMw/exec';
+  const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyBdBB6x_9SwFdLJxtYzVdjm1URAPD2r32iDaC0mlhbwamKd9ljm43ZhX_MXV4LeTmgMw/exec';
 
   // Mẫu tin nhắn mời cưới mặc định
-  const DEFAULT_MESSAGE_TEMPLATE =
-    `Thân gửi {name},
+  const DEFAULT_MESSAGE_TEMPLATE = 
+`Thân gửi {name},
 
 Bích Duyên & Việt Tiến trân trọng kính mời {name} đến chung vui cùng gia đình chúng mình tại Lễ Thành Hôn vào ngày 18.12.2026.
 
@@ -126,12 +125,7 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
 
   // ==================== GOOGLE SHEETS SYNC ====================
   const getSheetUrl = () => {
-    const saved = localStorage.getItem(STORAGE_KEY_SHEET_URL);
-    if (!saved || saved === OLD_SHEET_URL) {
-      localStorage.setItem(STORAGE_KEY_SHEET_URL, DEFAULT_SHEET_URL);
-      return DEFAULT_SHEET_URL;
-    }
-    return saved;
+    return localStorage.getItem(STORAGE_KEY_SHEET_URL) || DEFAULT_SHEET_URL;
   };
 
   const updateSheetSyncStatus = () => {
@@ -237,7 +231,7 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
         });
 
         // Nếu trên web có khách chưa có trên Sheet, đẩy lên Sheet
-        const missingOnSheet = guests.filter(g =>
+        const missingOnSheet = guests.filter(g => 
           !data.some(d => String(d.name).toLowerCase().trim() === g.name.toLowerCase())
         );
         if (missingOnSheet.length > 0) {
@@ -414,8 +408,9 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
     const base = getBaseWeddingUrl();
     const cleanName = (guestName || '')
       .trim()
-      .replace(/\+/g, '&')
-      .replace(/\s+/g, '_');
+      .replace(/\s+/g, '_')
+      .replace(/&/g, '%26')
+      .replace(/\+/g, '%2B');
     return `${base}?u=${cleanName}`;
   };
 
@@ -568,7 +563,7 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-    const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b =>
+    const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => 
       b.getAttribute('onclick').includes(tabId)
     );
     if (activeBtn) activeBtn.classList.add('active');
@@ -647,9 +642,9 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
             <input type="text" class="guest-link-input" readonly value="${escapeHtml(link)}" onclick="this.select()" />
           </td>
           <td class="status-cell" style="text-align: center;">
-            ${g.copied
-          ? `<span class="badge badge-copied" title="${g.copiedAt || ''}">✅ Đã copy</span>`
-          : `<span class="badge badge-pending">⏳ Chưa gửi</span>`}
+            ${g.copied 
+              ? `<span class="badge badge-copied" title="${g.copiedAt || ''}">✅ Đã copy</span>` 
+              : `<span class="badge badge-pending">⏳ Chưa gửi</span>`}
           </td>
           <td style="text-align: right;">
             <div class="table-actions">
@@ -679,14 +674,8 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
   };
 
   // 9. Quản Lý Lời Chúc (Sổ Lưu Bút)
-  const WISHES_CLEANUP_KEY = 'wedding_wishes_cleaned_v2';
   const loadWishes = () => {
     try {
-      if (!localStorage.getItem(WISHES_CLEANUP_KEY)) {
-        localStorage.removeItem(STORAGE_KEY_WISHES);
-        localStorage.removeItem('wedding_rsvps');
-        localStorage.setItem(WISHES_CLEANUP_KEY, 'true');
-      }
       const stored = localStorage.getItem(STORAGE_KEY_WISHES);
       wishes = stored ? JSON.parse(stored) : [];
       if (!Array.isArray(wishes)) wishes = [];
@@ -905,7 +894,7 @@ Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi ti
     importedList.forEach(item => {
       if (!item || !item.name || !item.message) return;
       // Kiểm tra trùng theo ID hoặc theo cặp (Tên + Nội dung)
-      const isExist = wishes.some(w =>
+      const isExist = wishes.some(w => 
         (item.id && String(w.id) === String(item.id)) ||
         (w.name.trim() === item.name.trim() && w.message.trim() === item.message.trim())
       );
