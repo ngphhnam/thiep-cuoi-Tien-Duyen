@@ -35,7 +35,7 @@ Source code thiệp cưới điện tử trực tuyến cao cấp, sao chép tr�
    - Nút 1-chạm sao chép số tài khoản kèm thông báo Toast.
 
 8. **Đồng Hồ Đếm Ngược (Live Countdown Timer)**:
-   - Đếm ngược Ngày - Giờ - Phút - Giây theo thời gian thực đến thời điểm 18/12/2026 tại Phước Long, Đồng Nai.
+   - Đếm ngược Ngày - Giờ - Phút - Giây theo thời gian thực đến thời điểm 20/12/2026 tại Lộc Thuận, Vĩnh Long.
 
 ---
 
@@ -87,7 +87,7 @@ npx live-server d:\invitation
 Mọi thông tin về cặp đôi, ngày cưới, ảnh, bài hát, tài khoản ngân hàng được quy tụ gọn gàng trong tệp **`js/data.js`**:
 
 - **Đổi tên cô dâu & chú rể**: Sửa mục `couple.groom.name` và `couple.bride.name`.
-- **Đổi ngày giờ cưới**: Sửa `weddingDate: "2026-12-18T09:00:00"`.
+- **Đổi ngày giờ cưới**: Sửa `weddingDate: "2026-12-20T09:00:00"`.
 - **Đổi tài khoản ngân hàng & mã QR**: Sửa mục `bankAccounts.groom` và `bankAccounts.bride`.
 - **Thêm/bớt bài hát cưới**: Thêm đường link mp3 vào danh sách `playlist`.
 - **Thay đổi ảnh cưới**: Cập nhật ảnh trong thư mục `image/` (`wedding-01.jpg` đến `wedding-16.jpg`).

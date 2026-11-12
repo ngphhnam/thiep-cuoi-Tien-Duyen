@@ -53,8 +53,8 @@ const App = (() => {
     const title = encodeURIComponent("Đám Cưới Bích Duyên & Việt Tiến");
     const details = encodeURIComponent("Trân trọng kính mời bạn đến tham dự lễ tân hôn của Bích Duyên & Việt Tiến tại Lộc Thuận, Vĩnh Long.");
     const location = encodeURIComponent("281 Quốc Lộ 57B, Lộc Thuận, Vĩnh Long");
-    // Format YYYYMMDDTHHmmssZ (18/12/2026 09:00:00 UTC+7 -> 02:00:00Z)
-    const dates = "20261218T020000Z/20261218T070000Z";
+    // Format YYYYMMDDTHHmmssZ (20/12/2026 09:00:00 UTC+7 -> 02:00:00Z)
+    const dates = "20261220T020000Z/20261220T070000Z";
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
   };
 

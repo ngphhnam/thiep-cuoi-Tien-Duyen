@@ -17,7 +17,7 @@ const AdminApp = (() => {
   const DEFAULT_MESSAGE_TEMPLATE = 
 `Thân gửi {name},
 
-Bích Duyên & Việt Tiến trân trọng kính mời {name} đến chung vui cùng gia đình chúng mình tại Lễ Thành Hôn vào ngày 18.12.2026.
+Bích Duyên & Việt Tiến trân trọng kính mời {name} đến chung vui cùng gia đình chúng mình tại Lễ Thành Hôn vào ngày 20.12.2026.
 
 Sự hiện diện của {name} là niềm vinh hạnh to lớn đối với chúng mình!
 Bấm vào thiệp cưới điện tử bên dưới để xem thông tin chi tiết và gửi lời chúc mừng cho chúng mình nhé:

@@ -9,9 +9,9 @@ const WEDDING_DATA = {
   theme: "classic",
 
   // Thông tin ngày cưới
-  weddingDate: "2026-12-18T09:00:00",
-  displayDate: "18 . 12 . 2026",
-  displayDateFull: "Thứ Sáu, ngày 18 tháng 12 năm 2026",
+  weddingDate: "2026-12-20T09:00:00",
+  displayDate: "20 . 12 . 2026",
+  displayDateFull: "Chủ Nhật, ngày 20 tháng 12 năm 2026",
   city: "Lộc Thuận, Vĩnh Long",
 
   // Thông tin cặp đôi
@@ -73,7 +73,7 @@ const WEDDING_DATA = {
       id: "tan-hon",
       title: "Lễ Tân Hôn",
       time: "09:00 - 10:30",
-      date: "18.12.2026",
+      date: "20.12.2026",
       icon: "🏠",
       image: "image/wedding-04.jpg",
       area: "Tư gia Nhà Trai",
@@ -84,7 +84,7 @@ const WEDDING_DATA = {
       id: "tiec-cuoi",
       title: "Tiệc Cưới",
       time: "11:00 - 14:00",
-      date: "18.12.2026",
+      date: "20.12.2026",
       icon: "💒",
       image: "image/wedding-05.jpg",
       area: "Tư gia Nhà Trai",
