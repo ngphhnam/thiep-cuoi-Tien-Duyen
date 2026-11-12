@@ -51,7 +51,18 @@ const WishesController = (() => {
   };
 
   // Tải danh sách lời chúc từ data.js và localStorage
+  const WISHES_CLEANUP_KEY = 'wedding_wishes_cleaned_v2';
   const loadWishes = () => {
+    try {
+      if (!localStorage.getItem(WISHES_CLEANUP_KEY)) {
+        localStorage.removeItem('wedding_custom_wishes');
+        localStorage.removeItem('wedding_rsvps');
+        localStorage.setItem(WISHES_CLEANUP_KEY, 'true');
+      }
+    } catch (e) {
+      console.warn('Storage cleanup err:', e);
+    }
+
     const initial = (window.WEDDING_DATA && window.WEDDING_DATA.initialWishes) || [];
 
     try {
